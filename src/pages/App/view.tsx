@@ -1,21 +1,12 @@
-import * as React   from 'react';
-import { Link, Route }    from "react-router-dom";
+import * as React       from 'react';
+import { Link, Route }  from "react-router-dom";
+
+import { Home }         from "../Home";
+import { About }        from "../About";
 
 import './style.css';
 
 // import logo from '../../images/logo.svg';
-
-const Home = () => (
-    <div>
-        <h2>Home</h2>
-    </div>
-);
-
-const About = () => (
-    <div>
-        <h2>About</h2>
-    </div>
-);
 
 class App extends React.Component {
     public render() {
