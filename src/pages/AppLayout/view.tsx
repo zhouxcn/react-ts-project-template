@@ -5,6 +5,7 @@ import Bundle           from '../../bundle';
 
 import './style.css';
 
+// 实现按需加载模块
 const load = (componentName: string) => () => {
     switch (componentName) {
         case 'Home':
@@ -21,7 +22,7 @@ const load = (componentName: string) => () => {
 const HomePage  = (props: any) => <Bundle load={load('Home')}>{(Home) => <Home {...props}/>}</Bundle>
 const AboutPage = (props: any) => <Bundle load={load('About')}>{(About) => <About {...props}/>}</Bundle>;
 
-class App extends React.Component {
+class AppLayout extends React.Component {
     public render() {
         return (
             <div className="App">
@@ -44,4 +45,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default AppLayout;
