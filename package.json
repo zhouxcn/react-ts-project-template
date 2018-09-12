@@ -47,9 +47,9 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "start": "cd src/web && node scripts/start.js",
+    "build": "cd src/web && node scripts/build.js",
+    "test": "cd src/web && node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
     "@types/jest": "^23.3.2",
