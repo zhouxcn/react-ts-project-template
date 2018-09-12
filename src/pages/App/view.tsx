@@ -1,19 +1,31 @@
 import * as React       from 'react';
 import { Link, Route }  from "react-router-dom";
 
-import { Home }         from "../Home";
-import { About }        from "../About";
+import Bundle           from '../../bundle';
 
 import './style.css';
 
-// import logo from '../../images/logo.svg';
+const load = (componentName: string) => () => {
+    switch (componentName) {
+        case 'Home':
+            return import('../Home');
+
+        case 'About':
+            return import('../About');
+        
+        default:
+            return import('../Home');
+    }
+};
+
+const HomePage  = (props: any) => <Bundle load={load('Home')}>{(Home) => <Home {...props}/>}</Bundle>
+const AboutPage = (props: any) => <Bundle load={load('About')}>{(About) => <About {...props}/>}</Bundle>;
 
 class App extends React.Component {
     public render() {
         return (
             <div className="App">
                 <header className="App-header">
-                    {/* <img src={logo} className="App-logo" alt="logo" /> */}
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
                 <ul>
@@ -25,8 +37,8 @@ class App extends React.Component {
                     </li>
                 </ul>
 
-                <Route exact={true} path="/" component={Home} />
-                <Route path="/about" component={About} />
+                <Route exact={true} path="/" component={HomePage} />
+                <Route path="/about" component={AboutPage} />
             </div>
         );
     }

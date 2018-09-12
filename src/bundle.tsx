@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface BundleProps {
-    load: ()                => Promise<void>;
+    load: ()                => Promise<any>;
     children: (mod: any)    => any;
 }
 
@@ -16,6 +16,8 @@ export default class Bundle extends React.Component<BundleProps, BundleStates> {
         this.state = {
             mod: null
         };
+
+        this.load   = this.load.bind(this);
     }
 
     public componentWillMount() {
@@ -40,7 +42,7 @@ export default class Bundle extends React.Component<BundleProps, BundleStates> {
         // 注意这里，使用Promise对象; mod.default导出默认
         props.load().then((mod: any) => {
             this.setState({
-                mod: mod.default ? mod.default : mod
+                mod: mod[Object.keys(mod)[0]] ? mod[Object.keys(mod)[0]] : mod
             });
         });
     }
