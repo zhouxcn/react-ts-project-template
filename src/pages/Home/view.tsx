@@ -19,7 +19,7 @@ class Home extends React.Component<HomeProps, HomeStates> {
     }
 
     public componentDidMount() {
-        setTimeout(() => this.setState({ ready: true }), 3000);
+        this.todaysBindPicture();
     }
 
     public render() {
@@ -30,6 +30,12 @@ class Home extends React.Component<HomeProps, HomeStates> {
                 </h1>
             </ReactPlaceholder>
         );
+    }
+
+    // 获取bing今日图片
+    private async todaysBindPicture(): Promise<void> {
+        // TODO
+        setTimeout(() => this.setState({ ready: true }), 3000);
     }
 }
 
