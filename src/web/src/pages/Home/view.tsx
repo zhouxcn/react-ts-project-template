@@ -6,7 +6,8 @@ import "react-placeholder/lib/reactPlaceholder.css";
 interface HomeProps { }
 
 interface HomeStates {
-    ready:  boolean;
+    ready:      boolean;
+    todayPic:   string;
 }
 
 class Home extends React.Component<HomeProps, HomeStates> {
@@ -14,7 +15,8 @@ class Home extends React.Component<HomeProps, HomeStates> {
         super(props);
 
         this.state = {
-            ready: false
+            ready: false,
+            todayPic: ''
         };
     }
 
@@ -25,17 +27,20 @@ class Home extends React.Component<HomeProps, HomeStates> {
     public render() {
         return (
             <ReactPlaceholder showLoadingAnimation={true} type="text" rows={3} ready={this.state.ready}>
-                <h1>
-                    这里是主页
-                </h1>
+                <img src={this.state.todayPic} alt="每日图片" width="100%" height="100%" />
             </ReactPlaceholder>
         );
     }
 
     // 获取bing今日图片
     private async todaysBindPicture(): Promise<void> {
-        // TODO
-        setTimeout(() => this.setState({ ready: true }), 3000);
+        const result = await fetch('/api/todayPic');
+        const todayPic = await result.json();
+        
+        this.setState({
+            ready: true,
+            todayPic: todayPic.todayPic
+        });
     }
 }
 

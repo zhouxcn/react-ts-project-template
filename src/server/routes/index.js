@@ -14,10 +14,10 @@ const promiseFetch = () => {
     });
 };
 
-router.get('/', async (ctx, next) => {
+router.get('/api/todayPic', async (ctx, next) => {
     try {
         const pic = await promiseFetch();
-        ctx.body = `https://www.bing.com${pic}`;
+        ctx.body = { todayPic: `https://www.bing.com${pic}` };
     } catch (error) {
         ctx.body = error.message;
     }
