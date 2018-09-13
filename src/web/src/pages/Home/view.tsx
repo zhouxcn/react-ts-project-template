@@ -1,4 +1,5 @@
 import * as React       from 'react';
+import { connect }      from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -34,14 +35,28 @@ class Home extends React.Component<HomeProps, HomeStates> {
 
     // 获取bing今日图片
     private async todaysBindPicture(): Promise<void> {
-        const result = await fetch('/api/todayPic');
-        const todayPic = await result.json();
-        
-        this.setState({
-            ready: true,
-            todayPic: todayPic.todayPic
-        });
+        try {
+            const result = await fetch('/api/todayPic');
+            const todayPic = await result.json();
+            
+            this.setState({
+                ready: true,
+                todayPic: todayPic.todayPic
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 }
 
-export default Home;
+const mapStatetoProps = (state: any) => {
+    return state;
+};
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+    const events = {};
+
+    return events;
+};
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Home);

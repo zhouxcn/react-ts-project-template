@@ -1,5 +1,10 @@
-import About from './view';
+import view                         from "./view";
+import { stateKey }                 from './actionTypes';
+import { initialState, reducer }    from './reducer';
 
 export {
-    About
+    view,
+    initialState,
+    reducer,
+    stateKey
 };

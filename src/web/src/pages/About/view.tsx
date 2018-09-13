@@ -1,4 +1,5 @@
 import * as React       from 'react';
+import { connect }      from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -33,4 +34,14 @@ class About extends React.Component<AboutProps, AboutStates> {
     }
 }
 
-export default About;
+const mapStatetoProps = (state: any) => {
+    return state;
+};
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+    const events = {};
+
+    return events;
+};
+
+export default connect(mapStatetoProps, mapDispatchToProps)(About);

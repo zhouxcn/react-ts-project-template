@@ -1,7 +1,7 @@
-import * as React   from 'react';
-import { Route }    from "react-router-dom";
+import * as React       from 'react';
+import { Link, Route }  from "react-router-dom";
 
-import Bundle       from '../../bundle';
+import Bundle           from '../../bundle';
 
 import './style.css';
 
@@ -26,15 +26,17 @@ class AppLayout extends React.Component {
     public render() {
         return (
             <div className="App">
-                <h1 className="App-title">Bing每日图片</h1>
-                {/* <ul>
-                    <li>
-                        <Link to="/">主页</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">关于</Link>
-                    </li>
-                </ul> */}
+                <div className="Header">
+                    <h1 className="App-title">Bing每日图片</h1>
+                    <ul>
+                        <li>
+                            <Link to="/">主页</Link>
+                        </li>
+                        <li>
+                            <Link to="/about">关于</Link>
+                        </li>
+                    </ul>                    
+                </div>
 
                 <Route exact={true} path="/" component={HomePage} />
                 <Route path="/about" component={AboutPage} />
