@@ -1,6 +1,7 @@
-import { resetPage, store } from './store';
+import store        from './store';
+import resetPage    from './resetPage';
 
 export {
-    resetPage,
-    store
+    store,
+    resetPage
 };

@@ -1,41 +1,28 @@
 import * as React       from 'react';
 import { connect }      from 'react-redux';
-import ReactPlaceholder from 'react-placeholder';
+
+import { AboutStates }  from './reducer';
 
 import "react-placeholder/lib/reactPlaceholder.css";
 
-interface AboutProps { }
+interface AboutProps extends AboutStates { }
 
-interface AboutStates {
-    ready:  boolean;
-}
-
-class About extends React.Component<AboutProps, AboutStates> {
+class About extends React.Component<AboutProps> {
     constructor(props: AboutProps) {
         super(props);
-
-        this.state = {
-            ready: false
-        };
-    }
-
-    public componentDidMount() {
-        setTimeout(() => this.setState({ ready: true }), 2000);
     }
 
     public render() {
         return (
-            <ReactPlaceholder showLoadingAnimation={true} type="text" rows={3} ready={this.state.ready}>
-                <h1>
-                    这里是关于页面
-                </h1>
-            </ReactPlaceholder>
+            <h1>
+                {this.props.view}
+            </h1>
         );
     }
 }
 
 const mapStatetoProps = (state: any) => {
-    return state;
+    return state.About;
 };
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {

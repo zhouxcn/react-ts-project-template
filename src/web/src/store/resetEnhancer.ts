@@ -20,7 +20,7 @@ export const resetEnhancer = (createStore: any) => (reducer: any, preloadedState
             type:   RESET_ACTION_TYPE,
             state:  changeState
         };
-
+        console.log(changeState);
         store.dispatch(action);
     };
 

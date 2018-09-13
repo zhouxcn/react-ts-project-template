@@ -30,7 +30,7 @@ class AppLayout extends React.Component {
                     <h1 className="App-title">Bing每日图片</h1>
                     <ul>
                         <li>
-                            <Link to="/">主页</Link>
+                            <Link to="/home">主页</Link>
                         </li>
                         <li>
                             <Link to="/about">关于</Link>
@@ -38,7 +38,7 @@ class AppLayout extends React.Component {
                     </ul>                    
                 </div>
 
-                <Route exact={true} path="/" component={HomePage} />
+                <Route exact={true} path="/home" component={HomePage} />
                 <Route path="/about" component={AboutPage} />
             </div>
         );
