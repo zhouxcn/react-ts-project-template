@@ -1,7 +1,7 @@
-import store        from './store';
-import resetPage    from './resetPage';
+import { initStore }    from './store';
+import * as ReducerTool from './ReducerTool';
 
 export {
-    store,
-    resetPage
+    initStore,
+    ReducerTool
 };

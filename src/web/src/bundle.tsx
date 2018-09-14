@@ -1,9 +1,9 @@
 import * as React       from 'react';
-import { resetPage }    from './store';
 
 interface BundleProps {
-    load: ()                => Promise<any>;
-    children: (mod: any)    => any;
+    load: ()                                    => Promise<any>;
+    children: (mod: any)                        => any;
+    resetPage: (mod: any, callbacl: () => void) => void;
 }
 
 interface BundleStates {
@@ -40,9 +40,8 @@ export default class Bundle extends React.Component<BundleProps, BundleStates> {
             mod: null
         });
 
-        // 注意这里，使用Promise对象; mod.default导出默认
         props.load().then((mod: any) => {
-            resetPage(mod, () => {
+            this.props.resetPage(mod, () => {
                 this.setState({
                     mod: mod.view
                 });

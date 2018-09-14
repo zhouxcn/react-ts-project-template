@@ -1,9 +1,51 @@
 import * as React       from 'react';
-import { Link, Route }  from "react-router-dom";
+import { BrowserRouter, Link, Route }  from "react-router-dom";
+import { combineReducers }  from 'redux';
+import { routerReducer }    from 'react-router-redux';
+import { Provider }             from 'react-redux';
 
+import { initStore }    from '../../store';
 import Bundle           from '../../bundle';
 
+// import { stateKey as HomeStateKey, reducer as HomeReducer } from '../Home';
+
 import './style.css';
+
+const originalReducers = {
+    routing:    routerReducer,
+    // [HomeStateKey]: HomeReducer
+};
+
+const store = initStore(originalReducers);
+
+const resetPage = (page: any, callback: any): void => {
+    const { view, reducer, stateKey, initialState } = page;
+
+    const newInitialState = {
+        ...initialState
+    };
+
+    const state = store.getState();
+    
+    const resetReducer = combineReducers({
+        ...store._reducers,
+        [stateKey]: reducer
+    });
+
+    store._reducers = {
+        ...store._reducers,
+        [stateKey]: reducer
+    };
+
+    const changeState = {
+        ...state,
+        [stateKey]: newInitialState
+    };
+
+    store.reset(resetReducer, changeState);
+
+    callback(null, view);
+};
 
 // 实现按需加载模块
 const load = (componentName: string) => () => {
@@ -19,8 +61,8 @@ const load = (componentName: string) => () => {
     }
 };
 
-const HomePage  = (props: any) => <Bundle load={load('Home')}>{(Home) => <Home {...props}/>}</Bundle>
-const AboutPage = (props: any) => <Bundle load={load('About')}>{(About) => <About {...props}/>}</Bundle>;
+const HomePage  = (props: any) => <Bundle load={load('Home')} resetPage={resetPage}>{(Home) => <Home {...props}/>}</Bundle>
+const AboutPage = (props: any) => <Bundle load={load('About')} resetPage={resetPage}>{(About) => <About {...props}/>}</Bundle>;
 
 class AppLayout extends React.Component {
     public render() {
@@ -45,4 +87,12 @@ class AppLayout extends React.Component {
     }
 }
 
-export default AppLayout;
+const App = () => (
+    <Provider store={store}>
+        <BrowserRouter>
+            <AppLayout />
+        </BrowserRouter>
+    </Provider>
+);
+
+export default App;

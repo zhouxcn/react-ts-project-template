@@ -6,7 +6,7 @@ export const initialState: HomeStates = {
     view: 'Home'
 };
 
-export const reducer = (state: HomeStates, action: any) => {
+export const reducer = (state: HomeStates = initialState, action: any): HomeStates => {
     switch (action.type) {
         case 'Home/getTodayPic':
             const newState = { ...state };
@@ -16,6 +16,4 @@ export const reducer = (state: HomeStates, action: any) => {
         default:
             return state;
     }
-
-    return state;
 };

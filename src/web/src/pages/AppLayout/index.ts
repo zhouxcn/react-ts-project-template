@@ -1,5 +1,5 @@
-import AppLayout from "./view";
+import App from "./view";
 
 export {
-    AppLayout
+    App
 };

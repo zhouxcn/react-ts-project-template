@@ -1,3 +1,3 @@
-export const stateKey       = 'Home';
+export const stateKey           = 'Home';
 
-export const GetTodayPic    = '/getTodayPic';
+export const ChangeStateAction  = stateKey + '/changeState';

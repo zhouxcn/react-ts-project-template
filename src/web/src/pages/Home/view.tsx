@@ -3,12 +3,15 @@ import { AnyAction }    from 'redux';
 import { connect }      from 'react-redux';
 
 import * as Actions     from './actions';
+import * as ActionTypes from './actionTypes';
 import { HomeStates }   from './reducer';
+
+import { ReducerTool }  from "../../store";
 
 interface HomeProps extends HomeStates, HomeEvents { }
 
 interface HomeEvents {
-    onGetTodayPic: (url: string) => void;
+    onChangeState: () => void;
 }
 
 class Home extends React.Component<HomeProps> {
@@ -20,6 +23,7 @@ class Home extends React.Component<HomeProps> {
         // const url = '/api/todayPic';
 
         // this.props.onGetTodayPic(url);
+        // this.props.onChangeState();
     }
 
     public render() {
@@ -48,13 +52,14 @@ class Home extends React.Component<HomeProps> {
 }
 
 const mapStatetoProps = (state: any) => {
-    return state.Home;
+    const props = ReducerTool.Funcs.mapStateToProps(state, ActionTypes.stateKey);
+    return props;
 };
 
 const mapDispatchToProps = (dispatch: any) => {
     const events: HomeEvents = {
-        onGetTodayPic(url: string): void {
-            const action: AnyAction = Actions.getTodayPic(url);
+        onChangeState(): void {
+            const action: AnyAction = Actions.changeState({view: '666'});
             dispatch(action);
         }
     };
