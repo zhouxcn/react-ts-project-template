@@ -1,9 +1,9 @@
 import * as React       from 'react';
+import { resetPage }    from './store';
 
 interface BundleProps {
-    load: ()                                    => Promise<any>;
-    children: (mod: any)                        => any;
-    resetPage: (mod: any, callbacl: () => void) => void;
+    load: ()                => Promise<any>;
+    children: (mod: any)    => any;
 }
 
 interface BundleStates {
@@ -41,7 +41,7 @@ export default class Bundle extends React.Component<BundleProps, BundleStates> {
         });
 
         props.load().then((mod: any) => {
-            this.props.resetPage(mod, () => {
+            resetPage(mod, () => {
                 this.setState({
                     mod: mod.view
                 });
